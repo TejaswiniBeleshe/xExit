@@ -1,4 +1,5 @@
 const Employee = require('../models/employee.model');
+const ResignInfo = require('../models/resign.model')
 const bcrypt = require('bcrypt');
 const jwttoken = require('jsonwebtoken');
 
@@ -18,6 +19,25 @@ class employeeLogics{
     }
     createToken(payload){
         return jwttoken.sign(payload,process.env.SECREATE_KEY)
+    }
+
+    compareToken(token){
+        return jwttoken.verify(token,process.env.SECREATE_KEY)
+    }
+
+    addResignOfEmployee(payload){
+        return ResignInfo.create(payload)
+    }
+
+    findUserById(id){
+        return Employee.findById(id)
+    }
+    findResignData(id){
+        return ResignInfo.findOne({empId:id})
+    }
+
+    deleteResignData(id){
+        return ResignInfo.findOneAndDelete({empId:id})
     }
 }
 

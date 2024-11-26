@@ -33,4 +33,37 @@ const loginUser = async(req,res)=>{
     }
 }
 
-module.exports = {registerNewUser,loginUser}
+const newUserResign = async(req,res)=>{
+    try{
+        let hasResign = await allEmployeeLogics.findResignData(req.user.id);
+        if(hasResign){
+            return res.status(409).send({message:'Already exist'})
+        }
+        let data = await allEmployeeLogics.addResignOfEmployee({...req.body,empId:req.user.id});
+        // console.log(req.user,data)
+        res.status(200).send(data)
+    }
+    catch(err){
+        res.status(500).send({message:err.message})
+    }
+}
+
+const deleteResign = async(req,res)=>{
+    try{
+        let hasResign = await allEmployeeLogics.findResignData(req.user.id);
+        if(!hasResign){
+           return res.status(404).send({message:'not found'})
+        }
+        res.status(200).send(await allEmployeeLogics.deleteResignData(hasResign.empId))
+
+    }
+    catch(err){
+        res.status(500).send({message:err.message})
+
+    }
+}
+
+
+
+
+module.exports = {registerNewUser,loginUser,newUserResign,deleteResign}

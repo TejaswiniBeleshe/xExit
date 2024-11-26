@@ -18,10 +18,11 @@ const Login = ()=>{
                 body:JSON.stringify({username:lname,password:lpassword})
             })
             let data = await respond.json();
-            // console.log(data)
+            console.log(data)
             if(data._doc.username){
                
-                if(data._doc.type === 'employee'){
+                if(data._doc.role === 'employee'){
+                    localStorage.setItem('token',data.token)
                     enqueueSnackbar('Employee dashboard',{
                         variant:'success',
                         autoHideDuration:3000,
@@ -45,6 +46,7 @@ const Login = ()=>{
                         horizontal:'center'
                     }
                 })
+                localStorage.setItem('token',data.token)
 
                 navigate('/admin');
 
@@ -68,6 +70,8 @@ const Login = ()=>{
         }
     }
     return(
+        <>
+        <h1>Login</h1>
         <form onSubmit={handleLogin}>
             <label htmlFor="lname">User Name</label><br/>
             <input type="text" id="lname" name="lname" value={lname} onChange={(e)=>setLname(e.target.value)} /><br/><br/>
@@ -78,6 +82,7 @@ const Login = ()=>{
              Haven't Register? <Link to='/register'><button>Register</button></Link>
             </p>
         </form>
+        </>
     )
 }
 export default Login;

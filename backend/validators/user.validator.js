@@ -11,5 +11,11 @@ const validateLoginUser = Joi.object({
     password:Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{3,30}$'))
 })
 
+const validateResignData = Joi.object({
+    empId:Joi.string().pattern(new RegExp('^[a-fA-F0-9]{24}$')).required(),
+    lwd:Joi.date().required(),
+    reason:Joi.string().min(3)
+})
 
-module.exports = {validateRegisterUser,validateLoginUser}
+
+module.exports = {validateRegisterUser,validateLoginUser,validateResignData}

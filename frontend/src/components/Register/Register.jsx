@@ -21,6 +21,7 @@ const Register = ()=>{
             })
             let data = await res.json();
             if(data && data.username){
+                localStorage.setItem('token',data.token)
                 enqueueSnackbar('Employee Dashboard',{
                     variant:'success',
                     autoHideDuration:3000,
@@ -48,6 +49,8 @@ const Register = ()=>{
         }
     }
     return(
+        <>
+        <h1>Register</h1>
         <form onSubmit={handleRegister}>
             <label htmlFor="rname">User Name</label><br/>
             <input type="text" id="rname" name="rname" value={username} onChange={(e)=>{setUsername(e.target.value)}}/><br/><br/>
@@ -57,6 +60,7 @@ const Register = ()=>{
             <input type="password" id="rpassword" name="rpassword" value={uPassword} onChange={(e)=>setUpassword(e.target.value)}/><br/><br/>
             <button type="submit">Register</button>
         </form>
+        </>
     )
 }
 
