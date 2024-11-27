@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import {enqueueSnackbar} from 'notistack'
+import './Login.css'
 const Login = ()=>{
     const [lname,setLname] = useState('');
     const [lpassword,setLpassword] = useState('');
@@ -77,9 +78,9 @@ const Login = ()=>{
             <input type="text" id="lname" name="lname" value={lname} onChange={(e)=>setLname(e.target.value)} /><br/><br/>
             <label htmlFor="lpassword">Password</label><br/>
             <input type="password" id="lpassword" name="lpassword" value={lpassword} onChange={(e)=>setLpassword(e.target.value)}/><br/><br/>
-            <button type="submit">Login</button><br/>
+            <button type="submit" id="l-btn">Login</button><br/>
             <p>
-             Haven't Register? <Link to='/register'><button>Register</button></Link>
+             Haven't Register? <Link to='/register'><button id="r-btn">Register</button></Link>
             </p>
         </form>
         </>
