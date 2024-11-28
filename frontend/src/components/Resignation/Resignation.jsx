@@ -70,11 +70,14 @@ const Resignation = ({setShowRform})=>{
             <div className={`modal-content d-flex flex-column`}>
                 <h1>Resign Form</h1>  
                 <form onSubmit={handleResignForm}>
-                    <label htmlFor="rdate">Last working Day</label><br />
+                    <label htmlFor="rdate">Last working Day</label><br /><br />
                     <input type="date" id="rdate" name="rdate" value={rDate} onChange={(e)=>setRdate(e.target.value)}/><br /><br />
-                    <label htmlFor="rreason">Reason</label>
-                    <textarea type="text" name="rreason" id="reason" value={rReason} onChange={(e)=>setRreason(e.target.value)}/>
-                    <button type="submit" >close</button>
+                    <label htmlFor="rreason">Reason</label><br /><br />
+                    <textarea type="text" name="rreason" id="reason" value={rReason} onChange={(e)=>setRreason(e.target.value)}/><br/><br />
+                    <div style={{"display":"flex","justifyContent":"space-around"}}>
+                       <button type="submit" id="send">Send</button>
+                       <button onClick={()=>setShowRform(false)} id="close">close</button>
+                    </div>
                 </form>
                
             </div>

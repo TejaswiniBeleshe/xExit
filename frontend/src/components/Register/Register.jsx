@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {useNavigate} from 'react-router-dom';
+import React, { useState } from "react";
+import {useNavigate,Link} from 'react-router-dom';
 import { enqueueSnackbar } from "notistack";
 import "../Login/Login.css"
 const Register = ()=>{
@@ -59,7 +59,7 @@ const Register = ()=>{
             <input type="email" id="remail" name="remail" value={uEmail} onChange={(e)=>{setUemail(e.target.value)}}/><br/><br/>
             <label htmlFor="upassword">Password</label><br/>
             <input type="password" id="rpassword" name="rpassword" value={uPassword} onChange={(e)=>setUpassword(e.target.value)}/><br/><br/>
-            <button type="submit" id="r-btn">Register</button>
+            <button type="submit" id="r-btn">Register</button><p> want to<Link to='/'> login</Link></p>
         </form>
         </>
     )
