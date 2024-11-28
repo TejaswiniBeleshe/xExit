@@ -1,3 +1,14 @@
 #l-btn{
     padding: .5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(95, 137, 214);
+    color: aliceblue;
+}
+#r-btn{
+    padding:.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color:rgb(230, 78, 230);
+    color: aliceblue;
 }

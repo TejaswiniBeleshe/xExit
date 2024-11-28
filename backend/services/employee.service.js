@@ -39,6 +39,10 @@ class employeeLogics{
     deleteResignData(id){
         return ResignInfo.findOneAndDelete({empId:id})
     }
-}
 
+    modifyResignation(payload){
+        console.log(payload)
+        return ResignInfo.findOneAndUpdate({_id:payload.resignationId},{$set:{status:payload.approved}},{new:true})
+    }
+}
 module.exports = employeeLogics

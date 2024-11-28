@@ -8,7 +8,8 @@ const Admin = ()=>{
     const navigate = useNavigate();
     const [arrUser,setArrayUser] = useState([]);
     const [allHolidays,setAllHolidays] = useState([])
-    const {load,setLoad} = useContext(context)
+    const {load,setLoad} = useContext(context);
+    const [action,setAction] = useState('')
     
     const getAllUser = async()=>{
         try{
@@ -57,12 +58,11 @@ const Admin = ()=>{
 
     useEffect(()=>{
         getAllHolidays()
-
     },[])
 
     useEffect(()=>{
-        getAllUser
-    })
+        getAllUser()
+    },[load])
     return(
         <>
         <div>
@@ -71,13 +71,17 @@ const Admin = ()=>{
         <button className='ad-btn' onClick={handleLogOut} >LogOut</button>
         </div>
         {allResigns?<table>
+            <thead>
             <tr>
-                <th>Emp Id</th>
-                <th>lwd</th>
+                <th>Resignation Id</th>
+               
                 <th>Reason</th>
+                <th>lwd</th>
                 <th>ACCEPT</th>
                 <th>REJECT</th>
             </tr>
+            </thead>
+            <tbody>
         {allResigns?allResigns.map((ele)=>{ 
             let r=''
             let result = allHolidays.some(holidays=>{
@@ -85,18 +89,19 @@ const Admin = ()=>{
                 return holidays.date === ele.lwd;
             });
             if(result){
-                return <Record lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r}/>
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r} />
             }else{
                 let days = ['SUN','MON','TUE','WED','THUR','FRI','SAT']
                 let date = new Date(ele.lwd);
                 let day = date.getDay()
                 if(days[day] == 'SAT' || days[day] == 'SUN'){
-                    return <Record lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name="WEEK END"/>
+                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} setAction={setAction} />
                 }
-                return <Record lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name=''/>
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} />
             }
             
         }):''}
+        </tbody>
         </table>:<p>NOBODY WANTS TO LEAVE COMPANY YET</p>}
         </>
 

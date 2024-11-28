@@ -6,5 +6,4 @@ class adminLogics{
     }
 }
 
-
 module.exports = adminLogics

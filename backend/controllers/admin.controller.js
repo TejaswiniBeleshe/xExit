@@ -1,5 +1,18 @@
 const  adminLogics = require('../services/admin.service');
 const allAdminLogics = new adminLogics();
+const employeeLogics = require('../services/employee.service.js');
+const allEmployeeLogics = new employeeLogics();
+const nodemailer = require('nodemailer')
+
+const transporter = nodemailer.createTransport({
+    host: "smtp.ethereal.email",
+    port: 587,
+    secure: false, // true for port 465, false for other ports
+    auth: {
+      user: "maddison53@ethereal.email",
+      pass: "jn7jnAPss4f63QBp6D",
+    },
+});
 
 const getAllResignations = async(req,res)=>{
     try{
@@ -11,4 +24,50 @@ const getAllResignations = async(req,res)=>{
     }
 }
 
-module.exports = {getAllResignations}
+const updateStatusOfResignation = async(req,res)=>{
+    try{ 
+        let data = await allEmployeeLogics.modifyResignation(req.body);
+        console.log(data,'update')
+        if(!data){
+            return res.status(404).send({message:'no id found'})
+        }
+        let getuser = await allEmployeeLogics.findUserById(data.empId);
+        return res.status(200).send({...data,email:getuser.email})
+
+    }
+    catch(err){
+        return res.status(500).send({message:err.message})
+
+    }
+}
+
+const sendMail = async(req,res)=>{
+    const transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        // service:'gmail',
+        port: 587,
+        secure: false, // true for port 465, false for other ports
+        auth: {
+          user: process.env.HR_EMAIL,
+          pass: process.env.HR_EMAIL_PASSWORD,
+        },
+    });
+
+    let {to,subject,text,html} = req.body;
+    if(!to || !subject || !text ){
+        return res.status(404).send({message:'Missing requirements'})
+    }
+    try{
+        const info = await transporter.sendMail({
+            from:process.env.HR_EMAIL,
+            to,subject,text,html
+        })
+        console.log(info)
+        return res.status(200).send(info)
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).send({message:'failed to send email'})
+    }
+}
+module.exports = {getAllResignations,updateStatusOfResignation,sendMail}

@@ -80,7 +80,7 @@ const Login = ()=>{
             <input type="password" id="lpassword" name="lpassword" value={lpassword} onChange={(e)=>setLpassword(e.target.value)}/><br/><br/>
             <button type="submit" id="l-btn">Login</button><br/>
             <p>
-             Haven't Register? <Link to='/register'><button id="r-btn">Register</button></Link>
+             Haven't Register? <Link to='/register'><span style={{'fontSize':'500'}}>Register</span></Link>
             </p>
         </form>
         </>
