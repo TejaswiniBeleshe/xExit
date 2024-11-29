@@ -104,16 +104,13 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
 
     return(
     <tr>
-         <td>{resignId}</td>
+        <td>{resignId}</td>
         <td>{reason}</td>
         <td>{lwd} {name}</td>
-        <td style={{"display":"flex","justifyContent":"space-around"}}><button onClick={()=>{
+        <td style={{"display":"flex","justifyContent":"space-around"}}>{status === 'true'?'Resignation Approved':status === 'false'?<h1></h1>:<><button onClick={()=>{
             setBtn('ACC')
-            setAction({id,act:'ACCEPT'})
-        }} id="accept" >ACCEPT</button><MdDangerous style={{"marginTop":".5rem"}} size={25} /></td>
-        <td><button id="reject" onClick={()=>{
-            setShowReject(true)
-        }}>Reject</button></td>
+            setAction({id,act:'ACCEPT'})}} id="accept" >ACCEPT</button><MdDangerous style={{"marginTop":".5rem"}} size={25} /></>}</td>
+        <td>{status==='false'?'Resignation Rejected':status==='true'?<h1></h1>:<button id="reject" onClick={()=>setShowReject(true)}>Reject</button>}</td>
         {showReject?<Reject  handleRejectReasons={handleRejectReasons} setShowReject={setShowReject} setBtn={setBtn} rejReason={rejReason} setRejreason={setRejreason}/>:''}
     </tr>
     )

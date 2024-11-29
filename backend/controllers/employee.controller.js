@@ -63,7 +63,21 @@ const deleteResign = async(req,res)=>{
     }
 }
 
+const getUserResignation = async(req,res)=>{
+    try{
+        console.log(req.user.id)
+        let userResign = await allEmployeeLogics.findResignData(req.user.id);
+        if(!userResign){
+            return res.status(404).send({message:'Resignation not found'})
+        }
+        return res.send(userResign)
+
+    }
+    catch(err){
+        res.status(500).send({message:err.message})
+    }
+}
 
 
 
-module.exports = {registerNewUser,loginUser,newUserResign,deleteResign}
+module.exports = {registerNewUser,loginUser,newUserResign,deleteResign,getUserResignation}

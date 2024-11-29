@@ -50,6 +50,7 @@ const Login = ()=>{
                 localStorage.setItem('token',data.token)
 
                 navigate('/admin');
+               
 
                 window.history.pushState(null, '', window.location.href);
                 window.onpopstate = function () {

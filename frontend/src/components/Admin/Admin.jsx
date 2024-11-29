@@ -37,12 +37,16 @@ const Admin = ()=>{
         localStorage.removeItem('token');
         localStorage.removeItem('userinfo')
         navigate('/')
+        window.history.pushState(null, '', window.location.href);
+                    window.onpopstate = function () {
+                      window.history.go(1);  // Prevent back navigation
+                    };
 
     }
 
     const getAllHolidays = async()=>{
         try{
-            let respo = await fetch('https://calendarific.com/api/v2/holidays?api_key=fN6GV5K06HZOPBHu3Hu1IuVmCsrZs7L1&country=IN&year=2024');
+            let respo = await fetch('https://calendarific.com/api/v2/holidays?api_key=rsfPUxoCnaV2TTgKKR8P7rjP0egK1X2w&country=IN&year=2024');
             let data = await respo.json();
             // setAllHolidays(data.response.holidays)
             let arr = data.response.holidays.map((ele)=>{
@@ -89,15 +93,15 @@ const Admin = ()=>{
                 return holidays.date === ele.lwd;
             });
             if(result){
-                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r} />
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r} status={ele.status}/>
             }else{
                 let days = ['SUN','MON','TUE','WED','THUR','FRI','SAT']
                 let date = new Date(ele.lwd);
                 let day = date.getDay()
                 if(days[day] == 'SAT' || days[day] == 'SUN'){
-                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} setAction={setAction} />
+                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} setAction={setAction} status={ele.status} />
                 }
-                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} />
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} status={ele.status}/>
             }
             
         }):''}

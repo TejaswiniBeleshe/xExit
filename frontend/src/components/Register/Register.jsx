@@ -32,6 +32,10 @@ const Register = ()=>{
                     }
                 })
                 navigate('/employee',{replace:true});
+                window.history.pushState(null, '', window.location.href);
+                    window.onpopstate = function () {
+                      window.history.go(1);  // Prevent back navigation
+                };
                 return 
                
             }

@@ -1,12 +1,13 @@
 const router = require('express').Router();
 const {validateRegInfo,validateLogInfo,validateResignInfo,auth} = require('../middwares/employee.middware.js')
-const {registerNewUser,loginUser,newUserResign,deleteResign} = require('../controllers/employee.controller.js')
+const {registerNewUser,loginUser,newUserResign,deleteResign,getUserResignation} = require('../controllers/employee.controller.js')
 
 
 
 router.post('/auth/register',validateRegInfo,registerNewUser)
 router.post('/auth/login',validateLogInfo,loginUser)
 router.post('/user/resign',[auth,validateResignInfo],newUserResign)
-router.delete('/user/resign',auth,deleteResign)
+router.delete('/user/resign',auth,deleteResign);
+router.get('/user/resignation',auth,getUserResignation)
 
 module.exports = router
