@@ -1,11 +1,15 @@
 const employeeLogics = require('../services/employee.service.js');
-const allEmployeeLogics = new employeeLogics()
+const allEmployeeLogics = new employeeLogics();
+
 
 const registerNewUser = async(req,res)=>{
     try{
         let newUser = await allEmployeeLogics.registerUser(req.body);
-        console.log(newUser)
-        return res.status(201).send(newUser);
+        // console.log(newUser);
+        let token = await allEmployeeLogics.createToken(newUser.id);
+         console.log(token)
+       
+        return res.status(200).send({...newUser,token});
     }
     catch(err){
         res.status(500).send({message:err.message})
@@ -76,8 +80,35 @@ const getUserResignation = async(req,res)=>{
     catch(err){
         res.status(500).send({message:err.message})
     }
+
 }
 
+const postUserResponse = async(req,res)=>{
+    console.log(req.body)
+    try{
+        console.log('user',req.user.id)
+        let data = await allEmployeeLogics.addUserResponse(req.body,req.user.id);
+        return res.status(200).send(data)
 
+    }
+    catch(err){
+        console.log(err)
+        return res.status(500).send({message:"Internal server error"})
+    }
+}
 
-module.exports = {registerNewUser,loginUser,newUserResign,deleteResign,getUserResignation}
+const getUserResponse = async(req,res)=>{
+    try{
+        let data = await allEmployeeLogics.findUserResponse(req.user._id);
+        if(!data){
+            return res.status(404).send({message:'Response not found,Please add respones'})
+        }
+        return res.send(data)
+
+    }
+    catch(err){
+        return res.status(500).send({message:err.message})
+    }
+}
+
+module.exports = {registerNewUser,loginUser,newUserResign,deleteResign,getUserResignation,postUserResponse,getUserResponse}

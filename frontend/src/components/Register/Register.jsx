@@ -20,8 +20,10 @@ const Register = ()=>{
                 },
                 body:JSON.stringify({email:uEmail,username:username,password:uPassword})
             })
+
             let data = await res.json();
-            if(data && data.username){
+            // console.log(data)
+            if(data && data.token){
                 localStorage.setItem('token',data.token)
                 enqueueSnackbar('Employee Dashboard',{
                     variant:'success',
@@ -31,7 +33,7 @@ const Register = ()=>{
                         horizontal:'center'
                     }
                 })
-                navigate('/employee',{replace:true});
+                navigate('/employee');
                 window.history.pushState(null, '', window.location.href);
                     window.onpopstate = function () {
                       window.history.go(1);  // Prevent back navigation

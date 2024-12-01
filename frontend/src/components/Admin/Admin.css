@@ -22,3 +22,13 @@ table {
   .ad-heading{
     letter-spacing: .6rem;
   }
+  .v-btn{
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(104, 210, 234);
+    position: absolute;
+    right: 8%;
+    top: 2%;
+
+  }

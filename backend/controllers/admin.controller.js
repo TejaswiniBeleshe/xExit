@@ -46,9 +46,9 @@ const sendMail = async(req,res)=>{
     });
 
     let {to,subject,text,html} = req.body;
-    if(!to || !subject || !text ){
-        return res.status(404).send({message:'Missing requirements'})
-    }
+    // if(!to || !subject || !text ){
+    //     return res.status(404).send({message:'Missing requirements'})
+    // }
     try{
         const info = await transporter.sendMail({
             from:process.env.HR_EMAIL,
@@ -62,4 +62,20 @@ const sendMail = async(req,res)=>{
         return res.status(500).send({message:'failed to send email'})
     }
 }
-module.exports = {getAllResignations,updateStatusOfResignation,sendMail}
+
+const ViewAllUserResponse = async(req,res)=>{
+    try{
+        let data = await allAdminLogics.getResponses();
+        if(!data){
+            return res.status(404).send({message:'No responses have found'})
+        }
+        console.log(data)
+        return res.send(data)
+
+    }
+    catch(err){
+        return res.status(500).send({message:err.message})
+
+    }
+}
+module.exports = {getAllResignations,updateStatusOfResignation,sendMail,ViewAllUserResponse}

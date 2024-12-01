@@ -7,9 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import { context } from "../../App";
 import { FcApproval } from "react-icons/fc";
 import { RiChatDeleteFill } from "react-icons/ri";
+import ExitQuestions from '../ExitQuestions/ExitQuestions.jsx';
+import QRCard from '../QRCard/QRCard.jsx';
 const Employee = ()=>{
     const navigate = useNavigate()
     const [showRform,setShowRform] = useState(false);
+    const [showQuest,setShowQuest] = useState(false);
+    const [allQR,setAllQR] = useState([]);
+    const [qRresponse,setQRresponse] = useState('')
    
     const {load,setLoad} = useContext(context);
     
@@ -23,6 +28,7 @@ const Employee = ()=>{
                 }
             })
             let res = await data.json();
+            
             // localStorage.removeItem('userinfo');
             // setLoad(Date.now())
             
@@ -71,10 +77,87 @@ const Employee = ()=>{
         }
     }
 
+    const sendUserResponse = async()=>{
+        try{
+            let data = await fetch('http://localhost:8082/api/user/responses',{
+                method:"POST",
+                headers:{
+                    "Authorization":`Bearer ${localStorage.getItem('token')}`,
+                    "Content-Type":"application/json"
+                },
+                body:JSON.stringify(allQR)
+            })
+            // let resp = await data.json();
+            // console.log(resp);
+           
+            // console.log(data)
+            if(data.status == 200){
+                setQRresponse(allQR)
+                enqueueSnackbar('Sent to HR',{
+                    variant:'success',
+                    autoHideDuration:2000,
+                    anchorOrigin:{
+                        vertical:'top',
+                        horizontal:'center'
+                    }
+                })
+                return
+            }
+            enqueueSnackbar('unable to send HR',{
+                variant:'error',
+                autoHideDuration:2000,
+                anchorOrigin:{
+                    vertical:'top',
+                    horizontal:'center'
+                }
+            })
+        }
+        catch(err){
+            console.log(err)
+            enqueueSnackbar(err.message,{
+                variant:'error',
+                autoHideDuration:2000,
+                anchorOrigin:{
+                    vertical:'top',
+                    horizontal:'center'
+                }
+            })
+
+        }
+    }
+
+    const getUserQR = async()=>{
+        try{
+            let data = await fetch('http://localhost:8082/api/user/responses',{
+                method:"GET",
+                headers:{
+                    Authorization:`Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            let res = await data.json();
+            console.log('getall response',res)
+            if(res){
+                setQRresponse(res.responses)
+            }
+            throw new Error('error')
+            
+        }
+        catch(err){
+            console.log(err.message)
+        }
+    }
+    useEffect(()=>{
+        if(allQR[0]){
+            sendUserResponse()
+        }
+    },[allQR])
+    
     useEffect(()=>{
        getResinationOfUser();
-       console.log(userResign)
+    //    console.log(userResign)
+       getUserQR()
     },[])
+
 
     return(
         <div className='card-main'>
@@ -84,9 +167,11 @@ const Employee = ()=>{
             {!userResign.lwd?<button onClick={(e)=>setShowRform(true)} id='res-btn'>Resign</button>:''}
             </div>
             <div className='resign-cards'>
-                {userResign.lwd?<div className='wrap'>{userResign.status==='true'?<>Approved <FcApproval /></>:userResign.status==='false'?<><button onClick={handleDelete} id='delete'>Delete</button><RiChatDeleteFill /></>:<button onClick={handleDelete} id='delete'>Delete</button>}<br /><Card userResign={userResign} /></div>:""}
+                {userResign.lwd?<div className='wrap'>{userResign.status==='true'?<div style={{"width":"100%","display":"flex","justifyContent":"space-around",}}><div>Approved <FcApproval /></div><button onClick={(e)=>setShowQuest(true)}>Questionnaira</button></div>:userResign.status==='false'?<><button onClick={handleDelete} id='delete'>Delete</button><RiChatDeleteFill /></>:<button onClick={handleDelete} id='delete'>Delete</button>}<br /><Card userResign={userResign} /></div>:""}
+                {qRresponse?<div style={{"backgroundColor":"pink"}}>{qRresponse.map((ele)=><QRCard questionText={ele.questionText} response={ele.response}/>)}</div>:''}
             </div>
             {showRform?<Resignation setShowRform={setShowRform} setUserResign={setUserResign}/>:''}
+            {showQuest?<ExitQuestions setShowQuest={setShowQuest} setAllQR={setAllQR}/>:''}
         </div>
     )
 }

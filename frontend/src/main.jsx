@@ -8,6 +8,7 @@ import Login from './components/Login/Login.jsx';
 import Register from './components/Register/Register.jsx';
 import Admin from './components/Admin/Admin.jsx';
 import Employee from './components/Employee/Employee.jsx';
+import AllQROfEmp from './components/AllQROfEmp/AllQROfEmp.jsx';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -16,6 +17,7 @@ const router = createBrowserRouter(
       <Route path='register' element={<Register/>}/>
       <Route path='admin' element={<Admin/>}/>
       <Route path='employee' element={<Employee/>}/>
+      <Route path='questionnair' element={<AllQROfEmp/>}/>
     </Route>
   )
 )

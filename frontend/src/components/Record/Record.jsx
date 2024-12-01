@@ -6,22 +6,30 @@ import { context } from "../../App";
 import {enqueueSnackbar} from 'notistack'
 
 const rej = `
-Dear,
-Thank you for submitting your resignation. However, due to critical business needs or contractual obligations, we are unable to accept it at this time.
-We value your contributions and would like to discuss this further to find a suitable resolution. Please let me know a convenient time to connect.
+    Dear Employee,
+    
+    We have reviewed your resignation letter dated . After careful consideration of current circumstances and discussions with the management team, we are unable to accept your resignation at this time.
+    
+    We value your role and contributions to [Company Name]. Please let us know if there are concerns or issues that we can address to support you better. We are open to a discussion to ensure mutual satisfaction and alignment moving forward.
+    
+    Best regards,
+    HR
+    XYZ Company
+    `
+    const acc = `
+    Dear Employee,
+    
+    We have received and reviewed your resignation letter dated. After due consideration, we accept your resignation, effective .
+    
+    We appreciate your contributions during your time with XYZ Company and wish you the best in your future endeavors. If you require any assistance with the transition or formalities, please feel free to reach out.
+    
+    Best regards,
+    HR
+    XYZ Company`
 
-Best regards,
-HR 
-xyz company
-`
-const acc = `
-Dear,
-Thank you for submitting your resignation. We accept your decision to leave Company.
-We appreciate your contributions during your time with us and wish you the best in your future endeavors. Please complete any pending tasks and handover formalities before your departure.
 
-Best regards, 
-HR
-xyz company`
+
+
 
 const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
     const [showReject,setShowReject] = useState(false);
@@ -31,6 +39,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
     const [updated,setUpdated] = useState({});
     const [stateBtn,setBtn] = useState('')
 
+    
     const handleRejectReasons = async()=>{
         // e.preventDefault()
         // console.log({resignationId:resignId,approved:'false',lwd})
@@ -44,7 +53,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`,
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({resignationId:resignId,approved:setBtn=='ACC'?'true':'false',lwd})
+                body:JSON.stringify({resignationId:resignId,approved:stateBtn=='ACC'?'true':'false',lwd})
             });
             let result = await data.json();
             console.log(result)
@@ -69,7 +78,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
                     Authorization:`Bearer ${localStorage.getItem('token')}`,
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({to:payload.email,subject:'Regarding Resignation',text:stateBtn=='ACC'?acc:rej+rejReason})
+                body:JSON.stringify({to:payload.email,subject:'Regarding Resignation',text:stateBtn=='ACC'?acc:rej})
             })
             let res = await data.json();
             console.log(res);

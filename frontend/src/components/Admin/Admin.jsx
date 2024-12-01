@@ -1,7 +1,7 @@
 import React, { useEffect, useState,useContext } from 'react';
 import './Admin.css'
 import Record from '../Record/Record';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,Link} from 'react-router-dom';
 import { context } from "../../App";
 const Admin = ()=>{
     const [allResigns,setAllResigns] = useState('');
@@ -35,7 +35,7 @@ const Admin = ()=>{
 
     const handleLogOut = ()=>{
         localStorage.removeItem('token');
-        localStorage.removeItem('userinfo')
+        // localStorage.removeItem('userinfo')
         navigate('/')
         window.history.pushState(null, '', window.location.href);
                     window.onpopstate = function () {
@@ -71,8 +71,9 @@ const Admin = ()=>{
         <>
         <div>
             <h1 className='ad-heading'>ADMIN DASHBOARD</h1>
-            <br />
+            <br />    
         <button className='ad-btn' onClick={handleLogOut} >LogOut</button>
+        <Link to='/questionnair'><button className='v-btn'>View Questionnaira</button></Link>
         </div>
         {allResigns?<table>
             <thead>
@@ -99,7 +100,7 @@ const Admin = ()=>{
                 let date = new Date(ele.lwd);
                 let day = date.getDay()
                 if(days[day] == 'SAT' || days[day] == 'SUN'){
-                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} setAction={setAction} status={ele.status} />
+                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} status={ele.status} />
                 }
                 return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} status={ele.status}/>
             }

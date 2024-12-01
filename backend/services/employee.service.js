@@ -1,5 +1,6 @@
 const Employee = require('../models/employee.model');
-const ResignInfo = require('../models/resign.model')
+const ResignInfo = require('../models/resign.model');
+const UserResponse = require('../models/emprespo.model')
 const bcrypt = require('bcrypt');
 const jwttoken = require('jsonwebtoken');
 
@@ -43,6 +44,20 @@ class employeeLogics{
     modifyResignation(payload){
         console.log(payload)
         return ResignInfo.findOneAndUpdate({_id:payload.resignationId},{$set:{status:payload.approved}},{new:true})
+    }
+
+    addUserResponse=async(payload,Id)=>{
+        console.log(payload,Id)
+        let userRespo = await UserResponse.findOne({employeeId:Id});
+        console.log(userRespo)
+        if(!userRespo){
+            // let data = {'employeeId':Id,responses:[payload]}
+            return await UserResponse.create({employeeId:Id,responses:[...payload]})
+        }
+        // return await UserResponse.findOneAndUpdate({employeeId:Id},{$push:{responses:payload}},{new:true})
+    }
+    findUserResponse(userId){
+        return UserResponse.findOne({employeeId:userId})
     }
 }
 module.exports = employeeLogics

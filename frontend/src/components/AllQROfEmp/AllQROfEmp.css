@@ -1,0 +1,11 @@
+.each-qr{
+    background-color: rgb(200, 238, 238);
+    padding: 1rem;
+    border-radius: 12px;
+    width: 30%;
+}
+.qr-cards{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
