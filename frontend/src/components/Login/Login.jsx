@@ -21,7 +21,6 @@ const Login = ()=>{
             let data = await respond.json();
             console.log(data)
             if(data._doc.username){
-               
                 if(data._doc.role === 'employee'){
                     localStorage.setItem('token',data.token)
                     enqueueSnackbar('Employee dashboard',{
