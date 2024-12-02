@@ -21,14 +21,13 @@ const Employee = ()=>{
     const [userResign,setUserResign] = useState({})
     const handleDelete = async()=>{
         try{
-            let data = await fetch('http://localhost:8082/api/user/resign',{
+            let data = await fetch('http://localhost:8080/api/user/resign',{
                 method:'DELETE',
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`
                 }
             })
             let res = await data.json();
-            
             // localStorage.removeItem('userinfo');
             // setLoad(Date.now())
             
@@ -56,18 +55,19 @@ const Employee = ()=>{
         navigate('/')
     }
 
-    const getResinationOfUser = async()=>{
+    const getResignationOfUser = async()=>{
         try{
-            let data = await fetch('http://localhost:8082/api/user/resignation',{
+            let data = await fetch('http://localhost:8080/api/user/resignation',{
                 method:'GET',
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
                 }
             });
             let resign = await data.json();
+            console.log(resign)
             if(resign.lwd){
                 // console.log(resign);
-                setUserResign({reason:resign.reason,lwd:resign.lwd,status:resign.status})
+                setUserResign({lwd:resign.lwd,status:resign.status})
             }
 
         }
@@ -79,7 +79,7 @@ const Employee = ()=>{
 
     const sendUserResponse = async()=>{
         try{
-            let data = await fetch('http://localhost:8082/api/user/responses',{
+            let data = await fetch('http://localhost:8080/api/user/responses',{
                 method:"POST",
                 headers:{
                     "Authorization":`Bearer ${localStorage.getItem('token')}`,
@@ -128,7 +128,7 @@ const Employee = ()=>{
 
     const getUserQR = async()=>{
         try{
-            let data = await fetch('http://localhost:8082/api/user/responses',{
+            let data = await fetch('http://localhost:8080/api/user/responses',{
                 method:"GET",
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -153,7 +153,7 @@ const Employee = ()=>{
     },[allQR])
     
     useEffect(()=>{
-       getResinationOfUser();
+        getResignationOfUser();
     //    console.log(userResign)
        getUserQR()
     },[])

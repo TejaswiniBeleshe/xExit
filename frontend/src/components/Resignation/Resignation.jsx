@@ -30,18 +30,18 @@ const Resignation = ({setShowRform,setUserResign})=>{
         try{
             let token = localStorage.getItem('token');
             // console.log(resignData)
-            let response = await fetch('http://localhost:8082/api/user/resign',{
+            let response = await fetch('http://localhost:8080/api/user/resign',{
                 method:'POST',
                 headers:{
                     'Authorization':`Bearer ${token}`,
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({lwd:rDate,reason:rReason})
+                body:JSON.stringify({lwd:rDate})
             })
             let data = await response.json();
             // setResData(data)
             console.log(data,'data posting reignation');
-            setUserResign({reason:data.reason,lwd:data.lwd,status:'pending'})
+            setUserResign({lwd:data.lwd,status:'pending'})
             // localStorage.setItem('userinfo',JSON.stringify({lwd:data.lwd,reason:data.reason}));
            
             enqueueSnackbar('Resignation Sent',{
@@ -73,12 +73,11 @@ const Resignation = ({setShowRform,setUserResign})=>{
                 <h1>Resign Form</h1>  
                 <form onSubmit={handleResignForm}>
                     <label htmlFor="rdate">Last working Day</label><br /><br />
-                    <input type="date" id="rdate" name="rdate" value={rDate} onChange={(e)=>setRdate(e.target.value)}/><br /><br />
+                    <input type="date" id="rdate" name="rdate" value={rDate} onChange={(e)=>setRdate(e.target.value)} required/><br /><br />
                     <label htmlFor="rreason">Reason</label><br /><br />
-                    <textarea type="text" name="rreason" id="reason" value={rReason} onChange={(e)=>setRreason(e.target.value)}/><br/><br />
-                    <button type="submit" id="send">Send</button>
+                    <textarea type="text" name="rreason" id="reason" value={rReason} onChange={(e)=>setRreason(e.target.value)} required/><br/><br />
+                    <button type="submit" id="send">Send</button><br /><br />
                     <div style={{"display":"flex","justifyContent":"space-around"}}>
-                      
                        <button onClick={()=>setShowRform(false)} id="close">close</button>
                     </div>
                 </form>

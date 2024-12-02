@@ -2,15 +2,11 @@ const mongoose = require('mongoose')
 
 
 const resignSchema = new mongoose.Schema({
-    empId:{
+    employeeId:{
         type:String,
         required:true
     },
     lwd:{
-        type:String,
-        required:true
-    },
-    reason:{
         type:String,
         required:true
     },

@@ -31,7 +31,9 @@
     border: none;
     border-radius: 8px;
     color:white;
+    text-align: start;
     background-color: rgb(128, 199, 202);
+    transition: transform 0.2s, padding 0.2s;
   }
   #close{
     padding:.7rem 1rem;
@@ -39,5 +41,15 @@
     border-radius: 8px;
     color:white;
     background-color: rgb(42, 39, 39);
+    transition: transform 0.2s, padding 0.2s;
 
   }
+  #close:active{
+    background-color: #8ea0a1;
+    transform: scale(1.1);
+}
+#send:active{
+  background-color: #bcbeb9;
+  transform: scale(1.1);
+
+}

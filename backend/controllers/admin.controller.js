@@ -23,8 +23,8 @@ const updateStatusOfResignation = async(req,res)=>{
         if(!data){
             return res.status(404).send({message:'no id found'})
         }
-        let getuser = await allEmployeeLogics.findUserById(data.empId);
-        return res.status(200).send({...data,email:getuser.email})
+        let getuser = await allEmployeeLogics.findUserById(data.employeeId);
+        return res.status(200).send({...data,username:getuser.username})
 
     }
     catch(err){
@@ -45,14 +45,14 @@ const sendMail = async(req,res)=>{
         },
     });
 
-    let {to,subject,text,html} = req.body;
+    let {to,subject,text} = req.body;
     // if(!to || !subject || !text ){
     //     return res.status(404).send({message:'Missing requirements'})
     // }
     try{
         const info = await transporter.sendMail({
             from:process.env.HR_EMAIL,
-            to,subject,text,html
+            to,subject,text
         })
         console.log(info)
         return res.status(200).send(info)

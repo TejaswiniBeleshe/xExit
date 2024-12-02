@@ -6,7 +6,7 @@ const jwttoken = require('jsonwebtoken');
 
 class employeeLogics{
     registerUser=async(payload)=>{
-        console.log(await this.hashPassword(payload.password))
+        // console.log(await this.hashPassword(payload.password))
         return Employee.create({...payload,password:await this.hashPassword(payload.password)});
     }
     hashPassword(password){
@@ -34,11 +34,11 @@ class employeeLogics{
         return Employee.findById(id)
     }
     findResignData(id){
-        return ResignInfo.findOne({empId:id})
+        return ResignInfo.findOne({employeeId:id})
     }
 
     deleteResignData(id){
-        return ResignInfo.findOneAndDelete({empId:id})
+        return ResignInfo.findOneAndDelete({employeeId:id})
     }
 
     modifyResignation(payload){
@@ -58,6 +58,9 @@ class employeeLogics{
     }
     findUserResponse(userId){
         return UserResponse.findOne({employeeId:userId})
+    }
+    getEmployeeByUsername(user){
+        return Employee.findOne({username:user})
     }
 }
 module.exports = employeeLogics

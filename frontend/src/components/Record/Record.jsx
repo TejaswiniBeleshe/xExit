@@ -46,8 +46,8 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
         // setShowReject(false)
         // e.preventDefault()
         try{  
-            console.log({resignationId:resignId,approved:'false',lwd})
-            let data = await fetch('http://localhost:8082/api/admin/conclude_resignation',{
+            // console.log({resignationId:resignId,approved:'false',lwd})
+            let data = await fetch('http://localhost:8080/api/admin/conclude_resignation',{
                 method:"PUT",
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`,
@@ -72,16 +72,16 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
 
     const sendMailToEmployee = async(payload)=>{
         try{
-            let data = await fetch('http://localhost:8082/api/admin/sendmail',{
+            let data = await fetch('http://localhost:8080/api/admin/sendmail',{
                 method:'POST',
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`,
                     'Content-Type':'application/json'
                 },
-                body:JSON.stringify({to:payload.email,subject:'Regarding Resignation',text:stateBtn=='ACC'?acc:rej})
+                body:JSON.stringify({to:payload.username,subject:'Regarding Resignation',text:stateBtn=='ACC'?acc:rej})
             })
             let res = await data.json();
-            console.log(res);
+            // console.log(res);
             setMailstatus(res)
             enqueueSnackbar('Mailed to employee',{
                 variant:"sucess",

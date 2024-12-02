@@ -20,7 +20,7 @@ const AllQROfEmp = ()=>{
 
     const getAll = async()=>{
         try{
-            let data = await fetch('http://localhost:8082/api/admin/exit_responses',{
+            let data = await fetch('http://localhost:8080/api/admin/exit_responses',{
                 method:"GET",
                 headers:{
                     "Authorization":`Bearer ${localStorage.getItem('token')}`

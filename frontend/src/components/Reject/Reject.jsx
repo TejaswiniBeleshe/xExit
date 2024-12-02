@@ -90,6 +90,7 @@ const Reject = ({setShowReject,setBtn,rejReason,setRejreason,handleRejectReasons
     //    }
     // },[showReject])
     const handleSetBtn = ()=>{
+        setBtn('REJ')
         handleRejectReasons();
         setShowReject(false)
     }

@@ -4,6 +4,7 @@ const allEmployeeLogics = new employeeLogics();
 
 const validateRegInfo = async(req,res,next)=>{
     try{
+        console.log(req.body)
        let {error} = validateRegisterUser.validate(req.body);
        if(error){
         return res.status(400).send({message:error.details[0].message})
@@ -21,6 +22,16 @@ const validateLogInfo = async(req,res,next)=>{
        if(error){
         return res.status(400).send({message:error.details[0].message})
        }
+       let userExist = await allEmployeeLogics.getEmployeeByUsername(req.body.username);
+       if(!userExist){
+        return res.status(404).send({message:"user not found"})
+
+       }
+       let correctpassword = await allEmployeeLogics.validatePassword(req.body.password,userExist.password);
+       console.log(correctpassword)
+       if(!correctpassword){
+        return res.status(401).send({message:"invalid credentials"})
+       }
        next()
     }
     catch(err){
@@ -37,13 +48,16 @@ const validateResignInfo = async(req,res,next)=>{
        if(error){
         return res.status(400).send({message:error.details[0].message})
        }
-       console.log('done')
+    //    console.log('done')
+       
        next();
     }
     catch(err){
         res.status(500).send({message:err.message})
     }
 }
+
+
 
 const auth = async(req,res,next)=>{
     // console.log('auth')

@@ -11,7 +11,7 @@ const Login = ()=>{
     const handleLogin = async(e)=>{
         e.preventDefault()
         try{
-            let respond = await fetch('http://localhost:8082/api/auth/login',{
+            let respond = await fetch('http://localhost:8080/api/auth/login',{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
@@ -19,7 +19,30 @@ const Login = ()=>{
                 body:JSON.stringify({username:lname,password:lpassword})
             })
             let data = await respond.json();
-            console.log(data)
+            console.log(data,'login respond')
+            if(data && data.message == 'user not found'){
+                enqueueSnackbar('Invalid user,Please register before logging in',{
+                    variant:'error',
+                    autoHideDuration:2000,
+                    anchorOrigin:{
+                        vertical:'top',
+                        horizontal:'center'
+                    }
+                })
+                return
+
+            }
+            if(data && data.message == 'invalid credentials'){
+                enqueueSnackbar('Please enter valid password',{
+                    variant:'error',
+                    autoHideDuration:2000,
+                    anchorOrigin:{
+                        vertical:'top',
+                        horizontal:'center'
+                    }
+                })
+                return
+            }
             if(data._doc.username){
                 if(data._doc.role === 'employee'){
                     localStorage.setItem('token',data.token)
@@ -47,7 +70,6 @@ const Login = ()=>{
                     }
                 })
                 localStorage.setItem('token',data.token)
-
                 navigate('/admin');
                
 
@@ -68,6 +90,7 @@ const Login = ()=>{
                     vertical:'top'
                 }
             })
+            return 
         }
     }
     return(
@@ -75,9 +98,9 @@ const Login = ()=>{
         <h1>Login</h1>
         <form onSubmit={handleLogin}>
             <label htmlFor="lname">User Name</label><br/>
-            <input type="text" id="lname" name="lname" value={lname} onChange={(e)=>setLname(e.target.value)} /><br/><br/>
+            <input type="email" id="lname" name="lname" value={lname} onChange={(e)=>setLname(e.target.value)} required/><br/><br/>
             <label htmlFor="lpassword">Password</label><br/>
-            <input type="password" id="lpassword" name="lpassword" value={lpassword} onChange={(e)=>setLpassword(e.target.value)}/><br/><br/>
+            <input type="password" id="lpassword" name="lpassword" value={lpassword} onChange={(e)=>setLpassword(e.target.value)} required/><br/><br/>
             <button type="submit" id="l-btn">Login</button><br/>
             <p>
              Haven't Register? <Link to='/register'><span style={{'fontSize':'500'}}>Register</span></Link>

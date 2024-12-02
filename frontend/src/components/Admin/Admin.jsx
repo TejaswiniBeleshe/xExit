@@ -14,7 +14,7 @@ const Admin = ()=>{
     const getAllUser = async()=>{
         try{
             let token = localStorage.getItem('token')
-            let data = await fetch('http://localhost:8082/api/admin/resignations',{
+            let data = await fetch('http://localhost:8080/api/admin/resignations',{
                 method:'GET',
                 headers:{
                     authorization:`Bearer ${token}`
@@ -94,15 +94,15 @@ const Admin = ()=>{
                 return holidays.date === ele.lwd;
             });
             if(result){
-                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r} status={ele.status}/>
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} emp={ele.empId} name={r} status={ele.status} setAction={setAction}/>
             }else{
                 let days = ['SUN','MON','TUE','WED','THUR','FRI','SAT']
                 let date = new Date(ele.lwd);
                 let day = date.getDay()
                 if(days[day] == 'SAT' || days[day] == 'SUN'){
-                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} status={ele.status} />
+                    return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name="lwd falls on WEEK END" id={ele.id} status={ele.status} setAction={setAction} />
                 }
-                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} status={ele.status}/>
+                return <Record key={ele._id} lwd={ele.lwd} reason={ele.reason} resignId={ele._id} name='' id={ele.id} status={ele.status} setAction={setAction}/>
             }
             
         }):''}

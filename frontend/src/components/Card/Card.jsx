@@ -11,7 +11,7 @@ const Card = ({userResign})=>{
     return(
         <div className='card'>
             <h4>{userResign.lwd}</h4>
-            <p>{userResign.reason}</p>
+            {/* <p>{userResign.reason}</p> */}
         </div>
     )
 }

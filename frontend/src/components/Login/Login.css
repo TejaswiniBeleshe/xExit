@@ -4,6 +4,7 @@
     border: none;
     background-color: rgb(95, 137, 214);
     color: aliceblue;
+    transition: transform 0.2s, padding 0.2s;
 }
 #r-btn{
     padding:.5rem 1rem;
@@ -11,4 +12,16 @@
     border: none;
     background-color:rgb(230, 78, 230);
     color: aliceblue;
+    transition: transform 0.2s, padding 0.2s;
 }
+#l-btn:active{
+    background-color: #bbc1c6;
+    /* box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); */
+    transform: scale(1.1);
+  }
+  #r-btn:active{
+    background-color: #bbc1c6;
+    /* box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2); */
+    transform: scale(1.1);
+
+  }

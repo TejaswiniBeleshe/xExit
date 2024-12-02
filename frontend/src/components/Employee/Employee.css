@@ -22,6 +22,7 @@
     border: none;
     background-color: rgb(104, 210, 234);
     font-weight: 600;
+    transition: transform 0.2s, padding 0.2s;
 }
 .emp-heading{
     letter-spacing: .6rem;
@@ -41,6 +42,7 @@
     font-weight: 600;
     border-radius: 8px;
     background-color: rgb(203, 175, 228);
+    transition: transform 0.2s, padding 0.2s;
     
 }
 #delete{
@@ -49,5 +51,15 @@
     font-weight: 600;
     border-radius: 8px;
     background-color: rgb(233, 61, 61);
+ 
     
+}
+#res-btn:active{
+    background-color: #c2c4bd;
+    transform: scale(1.1);
+}
+.emp-btn:active{
+    background-color: #bcbeb9;
+    transform: scale(1.1);
+
 }

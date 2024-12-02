@@ -4,32 +4,26 @@ const allEmployeeLogics = new employeeLogics();
 
 const registerNewUser = async(req,res)=>{
     try{
+        let userExist = await allEmployeeLogics.getEmployeeByUsername(req.body.username);
+        if(userExist){
+            return res.status(409).send({message:"user exit"})
+        }
         let newUser = await allEmployeeLogics.registerUser(req.body);
         // console.log(newUser);
-        let token = await allEmployeeLogics.createToken(newUser.id);
-         console.log(token)
-       
-        return res.status(200).send({...newUser,token});
+        // let token = await allEmployeeLogics.createToken(newUser.id);
+        //  console.log(token)
+        return res.status(201).send({message:"User registered successfully"});
     }
     catch(err){
-        res.status(500).send({message:err.message})
+        return res.status(500).send({message:err.message})
     }
 }
 
 const loginUser = async(req,res)=>{
     try{
-        let user = await allEmployeeLogics.getuserbyname(req.body.username);
-        if(!user){
-            return res.status(404).send('User not found')
-        }
-        
-        let correctPassword = await allEmployeeLogics.hashPassword(req.body.password,user.password);
-        if(!correctPassword){
-            return res.status(400).send('Please enter valid password')
-        }
-
+        let user = await allEmployeeLogics.getEmployeeByUsername(req.body.username);
         let token = await allEmployeeLogics.createToken(user.id);
-        console.log(token)
+        // console.log(token)
         res.status(200).send({...user,token})
     }
     catch(err){
@@ -43,7 +37,7 @@ const newUserResign = async(req,res)=>{
         if(hasResign){
             return res.status(409).send({message:'Already exist'})
         }
-        let data = await allEmployeeLogics.addResignOfEmployee({...req.body,empId:req.user.id});
+        let data = await allEmployeeLogics.addResignOfEmployee({...req.body,employeeId:req.user.id});
         // console.log(req.user,data)
         res.status(200).send(data)
     }
@@ -58,7 +52,7 @@ const deleteResign = async(req,res)=>{
         if(!hasResign){
            return res.status(404).send({message:'not found'})
         }
-        res.status(200).send(await allEmployeeLogics.deleteResignData(hasResign.empId))
+        res.status(200).send(await allEmployeeLogics.deleteResignData(hasResign.employeeId))
 
     }
     catch(err){
@@ -69,8 +63,10 @@ const deleteResign = async(req,res)=>{
 
 const getUserResignation = async(req,res)=>{
     try{
+        
         console.log(req.user.id)
         let userResign = await allEmployeeLogics.findResignData(req.user.id);
+        console.log(userResign)
         if(!userResign){
             return res.status(404).send({message:'Resignation not found'})
         }
