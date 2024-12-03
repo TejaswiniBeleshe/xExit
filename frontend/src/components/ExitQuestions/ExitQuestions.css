@@ -1,0 +1,50 @@
+.modalWrapper{
+    /* border: 1px solid red; */
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background-color:#e4dede;
+      opacity: .6;
+      /* color: white; */
+      padding: 3rem;
+      /* z-index: 1; */
+    }
+    
+  .modal-content{
+      text-align: center;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      height: auto;
+      transform: translate(-50%,-50%);
+      background-color: rgb(215, 189, 189);
+      width: 30%;
+      padding: 2rem;
+      /* border: 1px solid blue; */
+      border-radius: 12px;
+  }
+
+  #send{
+    padding:.7rem 1rem;
+    border: none;
+    border-radius: 8px;
+    color:white;
+    background-color: rgb(128, 199, 202);
+    transition: transform 0.2s ease;
+  }
+  #send:active{
+    transform: scale(1.2);
+  }
+  #close{
+    padding:.7rem 1rem;
+    border: none;
+    border-radius: 8px;
+    color:white;
+    background-color: rgb(42, 39, 39);
+    transition: transform 0.2s ease;
+  }
+  #close:active{
+    transform: scale(1.2);
+  }

@@ -1,0 +1,24 @@
+#accept{
+    border: none;
+    padding: 0.7rem 1rem;
+    border-radius: 8px;
+    background-color: rgb(82, 189, 82);
+    color: aliceblue;
+    transition: transform 0.2s ease;
+}
+
+#accept:active{
+    transform: scale(1.2);
+}
+
+#reject{
+    border: none;
+    padding: .7rem 1rem;
+    border-radius: 8px;
+    background-color: rgb(196, 72, 72);
+    color: aliceblue;
+    transition: transform 0.2s ease;
+}
+#reject:active{
+    transform: scale(1.2);
+}

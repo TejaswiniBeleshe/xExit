@@ -1,0 +1,22 @@
+#l-btn{
+    padding: .5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(95, 137, 214);
+    color: aliceblue;
+    transition: transform 0.2s ease;
+}
+#r-btn{
+    padding:.5rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color:rgb(230, 78, 230);
+    color: aliceblue;
+    transition: transform 0.2s ease;
+}
+#l-btn:active{
+    transform: scale(1.2);
+}
+#r-btn:active{
+    transform: scale(1.2);
+}

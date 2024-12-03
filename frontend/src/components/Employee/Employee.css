@@ -1,0 +1,67 @@
+.card-main{
+    display: flex;
+    flex-direction: column;
+    justify-content:center ;
+    align-items: center;
+}
+.resign-cards{
+    /* border:1px solid black; */
+    padding: 1rem;
+    margin:2rem;
+    width: 40%;
+}
+
+.wrap{
+    padding: 1rem;
+    background-color: rgb(235, 186, 194);
+}
+
+.emp-btn{
+    padding: .7rem 1rem;
+    border-radius: 8px;
+    border: none;
+    background-color: rgb(104, 210, 234);
+    font-weight: 600;
+    transition: transform 0.2s ease;
+}
+.emp-heading{
+    letter-spacing: .6rem;
+}
+
+.btns{
+    width: 13%;
+    display: flex;
+    justify-content: space-around;
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    transition: transform 0.2s ease;
+}
+.btns:active{
+    transform: scale(1.2);
+
+}
+#res-btn{
+    padding:.7rem 1rem;
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: rgb(203, 175, 228);
+    transition: transform 0.2s ease;
+    
+}
+#delete{
+    padding:.7rem 1rem;
+    border: none;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: rgb(233, 61, 61);
+    transition: transform 0.2s ease;
+    
+}
+#delete:active{
+    transform: scale(1.2);
+}
+#res-btn:active{
+    transform: scale(1.2);
+}
