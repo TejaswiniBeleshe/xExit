@@ -191,7 +191,7 @@ const Employee = ()=>{
             </div>
             <div className='resign-cards'>
                 {userResign.lwd?<div className='wrap'>{userResign.status==='true'?<div style={{"width":"100%","display":"flex","justifyContent":"space-around",}}><div style={{"textAlign":"left","marginTop":"1rem"}}>APPROVED</div><button className='q-btn' onClick={(e)=>setShowQuest(true)}>Questionnaira</button></div>:userResign.status==='false'?<><button onClick={handleDelete} id='delete'>Delete</button><RiChatDeleteFill /></>:<button onClick={handleDelete} id='delete'>Delete</button>}<br /><Card userResign={userResign} /></div>:""}
-                {qRresponse?<div className='r-card' style={{"backgroundColor":"pink","textAlign":"start"}}>{qRresponse.map((ele,i)=><QRCard questionText={ele.questionText} i={i} response={ele.response}/>)}</div>:''}
+                {qRresponse?<div className='r-card' style={{"textAlign":"start"}}>{qRresponse.map((ele,i)=><QRCard questionText={ele.questionText} i={i} response={ele.response}/>)}</div>:''}
             </div>
             {showRform?<Resignation setShowRform={setShowRform} setUserResign={setUserResign}/>:''}
             {showQuest?<ExitQuestions setShowQuest={setShowQuest} setAllQR={setAllQR}/>:''}
