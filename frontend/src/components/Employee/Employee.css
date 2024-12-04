@@ -22,7 +22,7 @@
     border: none;
     background-color: rgb(104, 210, 234);
     font-weight: 600;
-    transition: transform 0.2s ease;
+    /* transition: transform 0.2s ease; */
 }
 .emp-heading{
     letter-spacing: .6rem;
@@ -35,10 +35,10 @@
     position: absolute;
     top: 2%;
     right: 2%;
-    transition: transform 0.2s ease;
+    /* transition: transform 0.2s ease; */
 }
-.btns:active{
-    transform: scale(1.2);
+.emp-btn:active{
+    background-color: rgb(203, 223, 241);
 
 }
 #res-btn{
@@ -47,7 +47,7 @@
     font-weight: 600;
     border-radius: 8px;
     background-color: rgb(203, 175, 228);
-    transition: transform 0.2s ease;
+    /* transition: transform 0.2s ease; */
     
 }
 #delete{
@@ -63,7 +63,7 @@
     transform: scale(1.2);
 }
 #res-btn:active{
-    transform: scale(1.2);
+    background-color: rgb(203, 223, 241);
 }
 .r-card{
     padding: 1rem;

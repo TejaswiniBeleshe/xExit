@@ -29,7 +29,7 @@ const AllQROfEmp = ()=>{
                 
             });
             let res = await data.json();
-            console.log(res)
+            // console.log(res)
             setAllQROfUser(res)
         }
         catch(err){
@@ -44,7 +44,9 @@ const AllQROfEmp = ()=>{
     return(
         <>
             <Link to='/admin'><button id="d-board">Dashboard</button></Link>
+           
             <div className="qr-cards">
+            {allQROfUser && allQROfUser.length > 0?"":<p>The employee has not responded to the questionnaire yet. Please follow up with them to complete it.</p>}
             {
                 allQROfUser?allQROfUser.map((ele,i)=>{
                    return <EachQR ele={ele} />

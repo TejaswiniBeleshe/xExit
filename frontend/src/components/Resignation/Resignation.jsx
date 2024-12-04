@@ -69,7 +69,7 @@ const Resignation = ({setShowRform,setUserResign})=>{
     return createPortal(
         <>
         <div className="modalWrapper" onClick={()=>setShowRform(false)}></div>
-            <div className={`modal-content d-flex flex-column`}>
+            <div className={`modal-content-c d-flex flex-column`}>
                 <h1>Resign Form</h1>  
                 <form onSubmit={handleResignForm}>
                     <label htmlFor="rdate">Last working Day</label><br /><br />

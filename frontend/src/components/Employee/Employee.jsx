@@ -184,6 +184,7 @@ const Employee = ()=>{
     return(
         <div className='card-main'>
             <h1 className='emp-heading'>EMPLOYEE DASHBOARD</h1>
+            {!userResign.lwd?<p>You have not submitted your resignation yet. If you're planning to resign, please complete the resignation process.</p>:""}
             <div className='btns'>
             <button onClick={handleLogOut} className='emp-btn'>Logout</button>
             {!userResign.lwd?<button onClick={(e)=>setShowRform(true)} id='res-btn'>Resign</button>:''}

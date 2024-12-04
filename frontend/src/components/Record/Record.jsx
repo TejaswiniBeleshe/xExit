@@ -94,7 +94,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
         // setShowReject(false)
         // e.preventDefault()
         try{  
-            console.log({resignationId:resignId,approved:'false',lwd})
+            // console.log({resignationId:resignId,approved:'false',lwd})
             let data = await fetch(`${config.endpoint}/admin/conclude_resignation`,{
                 method:"PUT",
                 headers:{
@@ -130,7 +130,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
                 body:JSON.stringify({to:payload.email,subject:'Regarding Resignation',text:stateBtn=='ACC'?setMsgBasedOnAction({action:"ACC",name:""},lwd):name?setMsgBasedOnAction({action:"REJ",name},lwd):setMsgBasedOnAction({action:"REJ",name:""},lwd)})
             })
             let res = await data.json();
-            console.log(res);
+            // console.log(res);
             setMailstatus(res)
             enqueueSnackbar('Mailed to employee',{
                 variant:"sucess",

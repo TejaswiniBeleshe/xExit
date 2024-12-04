@@ -20,7 +20,7 @@ const Login = ()=>{
                 body:JSON.stringify({email:lname,password:lpassword})
             })
             let data = await respond.json();
-            console.log(data)
+            // console.log(data)
             if(data && data.message == 'user not found'){
                 enqueueSnackbar('Invalid user,Please register before logging in',{
                     variant:'error',

@@ -22,7 +22,7 @@ const Admin = ()=>{
                 }
             });
             let res = await data.json();
-            console.log(res);
+            // console.log(res);
             setAllResigns(res)
             // let arr = res.map((ele)=>{
             //     return 
@@ -53,7 +53,7 @@ const Admin = ()=>{
             let arr = data.response.holidays.map((ele)=>{
                 return {date:ele.date.iso,name:ele.name}
             });
-            console.log(arr)
+            // console.log(arr)
             setAllHolidays(arr)
         }
         catch(err){
@@ -76,11 +76,10 @@ const Admin = ()=>{
         <button className='ad-btn' onClick={handleLogOut} >LogOut</button>
         <Link to='/questionnair'><button className='v-btn'>View Questionnaira</button></Link>
         </div>
-        {allResigns?<table>
+        {allResigns && allResigns.length>0?<table>
             <thead>
             <tr>
                 <th>Resignation Id</th>
-               
                 <th>Reason</th>
                 <th>lwd</th>
                 <th>ACCEPT</th>
@@ -108,7 +107,7 @@ const Admin = ()=>{
             
         }):''}
         </tbody>
-        </table>:<p>NOBODY WANTS TO LEAVE COMPANY YET</p>}
+        </table>:<p>The employee has not submitted their resignation yet. Please follow up with them if needed.</p>}
         </>
 
     )
