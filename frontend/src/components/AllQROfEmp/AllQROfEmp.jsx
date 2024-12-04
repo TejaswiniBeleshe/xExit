@@ -5,10 +5,10 @@ import "./AllQROfEmp.css"
 const EachQR = ({ele})=>{
     const {employeeId,responses} = ele
     return(
-        <div className="each-qr">
-            <h4>{employeeId}</h4>
+        <div className="each-qr" style={{"textAlign":"start"}}>
+            <h4>EmployeeId: {employeeId}</h4>
             {
-                responses.map((qr)=><p>{qr.questionText}:{qr.response}</p>)
+                responses.map((qr,i)=><p><h4>{i+1} {qr.questionText}</h4><span>{qr.response}</span></p>)
             }
         </div>
     )
@@ -42,11 +42,11 @@ const AllQROfEmp = ()=>{
     },[])
     return(
         <>
-            <Link to='/admin'><button >Dashboard</button></Link>
+            <Link to='/admin'><button id="d-board">Dashboard</button></Link>
             <div className="qr-cards">
             {
-                allQROfUser?allQROfUser.map((ele)=>{
-                   return <EachQR ele={ele}/>
+                allQROfUser?allQROfUser.map((ele,i)=>{
+                   return <EachQR ele={ele} />
                 }):''
             }
             

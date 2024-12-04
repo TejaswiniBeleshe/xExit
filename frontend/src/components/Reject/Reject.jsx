@@ -5,7 +5,7 @@ import { context } from "../../App";
 import {enqueueSnackbar} from 'notistack'
 
 
-const Reject = ({setShowReject,setBtn,rejReason,setRejreason,handleRejectReasons})=>{
+const Reject = ({setShowReject,setBtn,rejReason,setRejreason,handleActions})=>{
     // const [rejReason,setRejreason] = useState(name || '' );
     // const {load,setLoad} = useContext(context)
     // const [updated,setUpdated] = useState({})
@@ -90,7 +90,7 @@ const Reject = ({setShowReject,setBtn,rejReason,setRejreason,handleRejectReasons
     //    }
     // },[showReject])
     const handleSetBtn = ()=>{
-        handleRejectReasons();
+        handleActions();
         setShowReject(false)
     }
     return createPortal(

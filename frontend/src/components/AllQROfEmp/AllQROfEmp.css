@@ -1,11 +1,29 @@
+.qr-cards{
+    margin-top: 4rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
+
 .each-qr{
     background-color: rgb(200, 238, 238);
     padding: 1rem;
     border-radius: 12px;
     width: 30%;
+    /* text-align: center; */
 }
-.qr-cards{
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
+
+#d-board{
+    padding: .7rem 1rem;
+    border: none;
+    border-radius: 12px;
+    background-color: rgb(238, 188, 120);
+    transition: transform 0.2s ease;
+    position: absolute;
+    right: 2%;
+
+    
+}
+#d-board:active{
+    transform: scale(1.2);
 }

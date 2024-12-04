@@ -1,9 +1,9 @@
 import React from "react";
 
-const QRCard = ({questionText,response})=>{
+const QRCard = ({questionText,response,i})=>{
     return(
         <>
-          <h5>{questionText}</h5>
+          <h5>{i+1} {questionText}</h5>
           <p>{response}</p>
         </>
     )

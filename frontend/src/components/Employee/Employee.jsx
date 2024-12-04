@@ -45,7 +45,14 @@ const Employee = ()=>{
             setUserResign({})
         }
         catch(err){
-            console.log(err)
+            enqueueSnackbar(err.message,{
+                variant:'error',
+                autoHideDuration:2000,
+                anchorOrigin:{
+                    vertical:'top',
+                    horizontal:'center'
+                }
+            })
         }
     }
 
@@ -72,7 +79,14 @@ const Employee = ()=>{
 
         }
         catch(err){
-            console.log(err)
+            enqueueSnackbar(err.message,{
+                variant:'error',
+                autoHideDuration:2000,
+                anchorOrigin:{
+                    vertical:'top',
+                    horizontal:'center'
+                }
+            })
 
         }
     }
@@ -113,7 +127,7 @@ const Employee = ()=>{
             })
         }
         catch(err){
-            console.log(err)
+            // console.log(err)
             enqueueSnackbar(err.message,{
                 variant:'error',
                 autoHideDuration:2000,
@@ -135,15 +149,22 @@ const Employee = ()=>{
                 }
             })
             let res = await data.json();
-            console.log('getall response',res)
+            // console.log('getall response',res)
             if(res){
                 setQRresponse(res.responses)
             }
-            throw new Error('error')
+            // throw new Error('error')
             
         }
         catch(err){
-            console.log(err.message)
+            enqueueSnackbar(err.message,{
+                variant:'error',
+                autoHideDuration:2000,
+                anchorOrigin:{
+                    vertical:'top',
+                    horizontal:'center'
+                }
+            })
         }
     }
     useEffect(()=>{
@@ -167,8 +188,8 @@ const Employee = ()=>{
             {!userResign.lwd?<button onClick={(e)=>setShowRform(true)} id='res-btn'>Resign</button>:''}
             </div>
             <div className='resign-cards'>
-                {userResign.lwd?<div className='wrap'>{userResign.status==='true'?<div style={{"width":"100%","display":"flex","justifyContent":"space-around",}}><div>Approved <FcApproval /></div><button onClick={(e)=>setShowQuest(true)}>Questionnaira</button></div>:userResign.status==='false'?<><button onClick={handleDelete} id='delete'>Delete</button><RiChatDeleteFill /></>:<button onClick={handleDelete} id='delete'>Delete</button>}<br /><Card userResign={userResign} /></div>:""}
-                {qRresponse?<div style={{"backgroundColor":"pink"}}>{qRresponse.map((ele)=><QRCard questionText={ele.questionText} response={ele.response}/>)}</div>:''}
+                {userResign.lwd?<div className='wrap'>{userResign.status==='true'?<div style={{"width":"100%","display":"flex","justifyContent":"space-around",}}><div style={{"textAlign":"left","marginTop":"1rem"}}>APPROVED</div><button className='q-btn' onClick={(e)=>setShowQuest(true)}>Questionnaira</button></div>:userResign.status==='false'?<><button onClick={handleDelete} id='delete'>Delete</button><RiChatDeleteFill /></>:<button onClick={handleDelete} id='delete'>Delete</button>}<br /><Card userResign={userResign} /></div>:""}
+                {qRresponse?<div className='r-card' style={{"backgroundColor":"pink","textAlign":"start"}}>{qRresponse.map((ele,i)=><QRCard questionText={ele.questionText} i={i} response={ele.response}/>)}</div>:''}
             </div>
             {showRform?<Resignation setShowRform={setShowRform} setUserResign={setUserResign}/>:''}
             {showQuest?<ExitQuestions setShowQuest={setShowQuest} setAllQR={setAllQR}/>:''}
