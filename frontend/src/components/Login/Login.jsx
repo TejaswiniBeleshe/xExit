@@ -97,7 +97,8 @@ const Login = ()=>{
     return(
         <>
         <h1>Login</h1>
-        <form onSubmit={handleLogin}>
+        
+        <form className="form-wrap" onSubmit={handleLogin}>
             <label htmlFor="lname">Email</label><br/>
             <input type="email" id="lname" name="lname" value={lname} onChange={(e)=>setLname(e.target.value)} /><br/><br/>
             <label htmlFor="lpassword">Password</label><br/>
@@ -107,6 +108,7 @@ const Login = ()=>{
              Haven't Register? <Link to='/register'><span style={{'fontSize':'500'}}>Register</span></Link>
             </p>
         </form>
+        
         </>
     )
 }

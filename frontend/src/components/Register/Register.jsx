@@ -68,7 +68,7 @@ const Register = ()=>{
     return(
         <>
         <h1>Register</h1>
-        <form onSubmit={handleRegister}>
+        <form className="form-wrap" onSubmit={handleRegister}>
             <label htmlFor="rname">User Name</label><br/>
             <input type="text" id="rname" name="rname" value={username} onChange={(e)=>{setUsername(e.target.value)}}/><br/><br/>
             <label htmlFor="remail">Email</label><br/>
