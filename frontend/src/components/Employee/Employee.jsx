@@ -9,6 +9,7 @@ import { FcApproval } from "react-icons/fc";
 import { RiChatDeleteFill } from "react-icons/ri";
 import ExitQuestions from '../ExitQuestions/ExitQuestions.jsx';
 import QRCard from '../QRCard/QRCard.jsx';
+import { config } from '../../App';
 const Employee = ()=>{
     const navigate = useNavigate()
     const [showRform,setShowRform] = useState(false);
@@ -21,7 +22,7 @@ const Employee = ()=>{
     const [userResign,setUserResign] = useState({})
     const handleDelete = async()=>{
         try{
-            let data = await fetch('http://localhost:8080/api/user/resign',{
+            let data = await fetch(`${config.endpoint}/user/resign`,{
                 method:'DELETE',
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`
@@ -65,7 +66,7 @@ const Employee = ()=>{
 
     const getResinationOfUser = async()=>{
         try{
-            let data = await fetch('http://localhost:8080/api/user/resignation',{
+            let data = await fetch(`${config.endpoint}/user/resignation`,{
                 method:'GET',
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`
@@ -93,7 +94,7 @@ const Employee = ()=>{
 
     const sendUserResponse = async()=>{
         try{
-            let data = await fetch('http://localhost:8080/api/user/responses',{
+            let data = await fetch(`${config.endpoint}/user/responses`,{
                 method:"POST",
                 headers:{
                     "Authorization":`Bearer ${localStorage.getItem('token')}`,
@@ -142,7 +143,7 @@ const Employee = ()=>{
 
     const getUserQR = async()=>{
         try{
-            let data = await fetch('http://localhost:8080/api/user/responses',{
+            let data = await fetch(`${config.endpoint}/user/responses`,{
                 method:"GET",
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`

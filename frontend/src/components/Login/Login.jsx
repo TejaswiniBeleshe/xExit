@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import {Link, useNavigate} from 'react-router-dom'
 import {enqueueSnackbar} from 'notistack'
-import './Login.css'
+import './Login.css';
+import { config } from "../../App";
 const Login = ()=>{
     const [lname,setLname] = useState('');
     const [lpassword,setLpassword] = useState('');
@@ -11,7 +12,7 @@ const Login = ()=>{
     const handleLogin = async(e)=>{
         e.preventDefault()
         try{
-            let respond = await fetch('http://localhost:8080/api/auth/login',{
+            let respond = await fetch(`${config.endpoint}/auth/login`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'

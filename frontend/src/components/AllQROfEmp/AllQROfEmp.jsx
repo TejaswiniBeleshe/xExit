@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import "./AllQROfEmp.css"
+import "./AllQROfEmp.css";
+import { config } from "../../App";
 
 const EachQR = ({ele})=>{
     const {employeeId,responses} = ele
@@ -20,7 +21,7 @@ const AllQROfEmp = ()=>{
 
     const getAll = async()=>{
         try{
-            let data = await fetch('http://localhost:8080/api/admin/exit_responses',{
+            let data = await fetch(`${config.endpoint}/admin/exit_responses`,{
                 method:"GET",
                 headers:{
                     "Authorization":`Bearer ${localStorage.getItem('token')}`

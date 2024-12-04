@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import "./Resignation.css"
 import {enqueueSnackbar} from 'notistack'
 import { context } from "../../App";
-
+import { config } from "../../App";
 const Resignation = ({setShowRform,setUserResign})=>{
     const [rDate,setRdate] = useState('');
     const [rReason,setRreason] = useState('');
@@ -30,7 +30,7 @@ const Resignation = ({setShowRform,setUserResign})=>{
         try{
             let token = localStorage.getItem('token');
             // console.log(resignData)
-            let response = await fetch('http://localhost:8080/api/user/resign',{
+            let response = await fetch(`${config.endpoint}/user/resign`,{
                 method:'POST',
                 headers:{
                     'Authorization':`Bearer ${token}`,

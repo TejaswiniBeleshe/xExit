@@ -4,6 +4,10 @@ import {Link,Outlet} from 'react-router-dom'
 // import EmployeeRes from './components/EmployeeRes/EmployeeRes';
 export const context = createContext();
 
+export const config = {
+  endpoint:"https://xexit-backend-50yo.onrender.com/api"
+}
+
 function App() {
   const [load,setLoad] = useState('')
   return (

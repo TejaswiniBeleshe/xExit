@@ -3,6 +3,7 @@ import './Admin.css'
 import Record from '../Record/Record';
 import { useNavigate ,Link} from 'react-router-dom';
 import { context } from "../../App";
+import { config } from '../../App';
 const Admin = ()=>{
     const [allResigns,setAllResigns] = useState('');
     const navigate = useNavigate();
@@ -14,7 +15,7 @@ const Admin = ()=>{
     const getAllUser = async()=>{
         try{
             let token = localStorage.getItem('token')
-            let data = await fetch('http://localhost:8080/api/admin/resignations',{
+            let data = await fetch(`${config.endpoint}/admin/resignations`,{
                 method:'GET',
                 headers:{
                     authorization:`Bearer ${token}`

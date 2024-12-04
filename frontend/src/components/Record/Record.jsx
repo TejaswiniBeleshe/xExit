@@ -3,7 +3,8 @@ import { MdDangerous } from "react-icons/md";
 import Reject from "../Reject/Reject";
 import "./Record.css"
 import { context } from "../../App";
-import {enqueueSnackbar} from 'notistack'
+import {enqueueSnackbar} from 'notistack';
+import { config } from "../../App";
 
 function setMsgBasedOnAction(act,d){
 const {action,name} = act
@@ -94,7 +95,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
         // e.preventDefault()
         try{  
             console.log({resignationId:resignId,approved:'false',lwd})
-            let data = await fetch('http://localhost:8080/api/admin/conclude_resignation',{
+            let data = await fetch(`${config.endpoint}/admin/conclude_resignation`,{
                 method:"PUT",
                 headers:{
                     'Authorization':`Bearer ${localStorage.getItem('token')}`,
@@ -120,7 +121,7 @@ const Record = ({resignId,lwd,reason,name,id,setAction,status})=>{
 
     const sendMailToEmployee = async(payload)=>{
         try{
-            let data = await fetch('http://localhost:8080/api/admin/sendmail',{
+            let data = await fetch(`${config.endpoint}/admin/sendmail`,{
                 method:'POST',
                 headers:{
                     Authorization:`Bearer ${localStorage.getItem('token')}`,

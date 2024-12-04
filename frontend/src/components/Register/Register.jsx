@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {useNavigate,Link} from 'react-router-dom';
 import { enqueueSnackbar } from "notistack";
 import "../Login/Login.css"
+import { config } from "../../App";
 const Register = ()=>{
     const navigate = useNavigate()
     const [username,setUsername] = useState('');
@@ -12,7 +13,7 @@ const Register = ()=>{
     const handleRegister = async(e)=>{
         e.preventDefault()
         try{
-            let res = await fetch('http://localhost:8080/api/auth/register',{
+            let res = await fetch(`${config.endpoint}/auth/register`,{
                 method:'POST',
                 headers:{
                     'Content-Type':'application/json'
