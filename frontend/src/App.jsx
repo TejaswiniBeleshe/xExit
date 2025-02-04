@@ -5,7 +5,7 @@ import {Link,Outlet} from 'react-router-dom'
 export const context = createContext();
 
 export const config = {
-  endpoint:"https://xexit-backend-50yo.onrender.com/api"
+  endpoint:"http://localhost:8081/api"
 }
 
 function App() {
